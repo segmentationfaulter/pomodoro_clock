@@ -1,3 +1,12 @@
 $(document).ready(function() {
-  $('p').text('hello');
+  var intervalID = setInterval(timer, 1000);
+  var targetTime = Date.now() + (1 * 60 * 1000);
+
+  // timer callback for setInterval function
+  function timer() {
+    var secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
+    $('h1').text(secondsLeft);
+    if (secondsLeft <= 0)
+      clearInterval(intervalID);
+  }
 });
