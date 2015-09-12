@@ -1,0 +1,7 @@
+body {
+  color: white;
+  background: #333333;
+}
+#session-length, #break-length {
+  font-size: 150%;
+}

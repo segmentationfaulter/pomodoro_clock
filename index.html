@@ -12,18 +12,38 @@
 </head>
 
 <body>
-  <div class="row header">
-    <div class="col-md-12">
+  <div class="container">
+    <div class="row" id="header">
+      <div class="col-md-12 text-center">
+        <h1>Pomodoro Clock</h1>
+      </div>
     </div>
-  </div>
-  <div class="row controls">
-    <div class="col-md-12">
+    <div class="row" id="session-controls">
+      <div class="col-md-6 text-right">
+        <small>Break Length</small>
+        <br>
+        <button class="btn btn-default btn-xs" id="break-down"><i class="fa fa-arrow-down"></i></button>
+        <span id="break-length">5</span>
+        <button class="btn btn-default btn-xs" id="break-down"><i class="fa fa-arrow-up"></i></button>
+      </div>
+      <div class="col-md-6">
+        <small>Session Length</small>
+        <br>
+        <button class="btn btn-default btn-xs" id="session-down"><i class="fa fa-arrow-down"></i></button>
+        <span id="session-length">25</span>
+        <button class="btn btn-default btn-xs" id="session-up"><i class="fa fa-arrow-up"></i></button>
+      </div>
     </div>
-  </div>
-  <div class="row timer">
-    <div class="col-md-12">
-      <h1 id="down-counter" class="text-center"></h1>
-      <button class="btn btn-default btn-primary center-block">Start</button>
+    <div class="row" id="timer">
+      <div class="col-md-12">
+        <h1 id="down-counter" class="text-center"></h1>
+      </div>
+    </div>
+    <div class="row" id="timer-controls">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-default" id="start">Start</button>
+        <button class="btn btn-default" id="reset">Reset</button>
+      </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
