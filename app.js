@@ -72,13 +72,20 @@ $(document).ready(function() {
     }
   }
 
-  var targetTime, intervalID, secondsLeft, sessionLength;
+  var intervalID;
 
-  // displays the secondsLeft before clicking the start button
-  sessionLength = +$('#session-length').text();
-  targetTime = Date.now() + (sessionLength * 60 * 1000);
-  secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
-  $('#down-counter').text(timeLeft(secondsLeft));
+  /**
+  * displayTimer() displays the timer in human readable format
+  */
+  function displayTimer() {
+    var targetTime, secondsLeft, sessionLength;
+    sessionLength = +$('#session-length').text();
+    targetTime = Date.now() + (sessionLength * 60 * 1000);
+    secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
+    $('#down-counter').text(timeLeft(secondsLeft));
+  }
+  
+  displayTimer();
 
   $('#timer-controls').on('click', '#start', function() {
 
