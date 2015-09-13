@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+  'use strict';
   /**
    * The code below makes the arrows which control the seesion length and
    * break length work.
@@ -74,7 +74,6 @@ $(document).ready(function() {
     }
   }
 
-  var intervalID;
 
   /**
   * displayTimer() displays the timer in human readable format
@@ -89,6 +88,7 @@ $(document).ready(function() {
 
   displayTimer();
 
+  var intervalID, targetTime;
   $('#timer-controls').on('click', '#start-work', function() {
 
     /**
@@ -100,7 +100,6 @@ $(document).ready(function() {
      * the repeated calls to callback function which were initiated against intervalID of 1
      * and the callback function will be called infinitely.
      */
-
     if (intervalID) {
       clearInterval(intervalID);
     }
@@ -118,9 +117,9 @@ $(document).ready(function() {
      * and clicking the start button
      */
 
-    sessionLength = +$('#session-length').text();
+    var sessionLength = +$('#session-length').text();
     targetTime = Date.now() + (sessionLength * 60 * 1000);
-    secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
+    var secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
     intervalID = setInterval(timer, 1000);
   });
 
@@ -128,7 +127,7 @@ $(document).ready(function() {
   function timer() {
 
     // fresh value of secondsLeft is calculated after every second
-    secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
+    var secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
     $('#down-counter').text(timeLeft(secondsLeft));
     if (secondsLeft <= 0)
       clearInterval(intervalID);
