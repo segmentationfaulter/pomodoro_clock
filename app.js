@@ -44,10 +44,12 @@ $(document).ready(function() {
     $('#session-controls').on('click', '#session-down', function() {
       var decrementer = decrement.bind($(this));
       decrementer('#session-length');
+      displayTimer();
     });
     $('#session-controls').on('click', '#session-up', function() {
       var incrementer = increment.bind($(this));
       incrementer('#session-length');
+      displayTimer();
     });
   })();
 
@@ -84,7 +86,7 @@ $(document).ready(function() {
     secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
     $('#down-counter').text(timeLeft(secondsLeft));
   }
-  
+
   displayTimer();
 
   $('#timer-controls').on('click', '#start', function() {
