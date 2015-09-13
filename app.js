@@ -89,7 +89,7 @@ $(document).ready(function() {
 
   displayTimer();
 
-  $('#timer-controls').on('click', '#start', function() {
+  $('#timer-controls').on('click', '#start-work', function() {
 
     /**
      * look what will happen if the three lines of code below are not there.
@@ -106,7 +106,7 @@ $(document).ready(function() {
     }
 
     // disable the start button once it is clicked once
-    $('#start').attr('disabled', '');
+    $('#start-work').attr('disabled', '');
 
     /**
      * re-calculates the secondsLeft after clicking the start button
