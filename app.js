@@ -1,4 +1,55 @@
 $(document).ready(function() {
+
+  /**
+  * The code below makes the arrows which control the seesion length and
+  * break length work.
+  */
+
+  function decrement(targetNode) {
+    var val = +$(this).siblings(targetNode).text();
+    val--;
+    if (val >= 0)
+      $(targetNode).text(val);
+    else
+      $(targetNode).text('0');
+  }
+
+  function increment(targetNode) {
+    var val = +$(this).siblings(targetNode).text();
+    val++;
+    if (targetNode === '#break-length') {
+      if (val > 5)
+        $(targetNode).text('5');
+      else
+        $(targetNode).text(val);
+    }
+    else if (targetNode === '#session-length') {
+      if (val > 25)
+        $(targetNode).text('25');
+      else
+        $(targetNode).text(val);
+    }
+  }
+
+  $('#session-controls').on('click', '#break-up', function() {
+    var incrementer = increment.bind($(this));
+    incrementer('#break-length');
+  });
+
+  $('#session-controls').on('click', '#break-down', function() {
+    var decrementer = decrement.bind($(this));
+    decrementer('#break-length');
+  });
+
+  $('#session-controls').on('click', '#session-down', function() {
+    var decrementer = decrement.bind($(this));
+    decrementer('#session-length');
+  });
+  $('#session-controls').on('click', '#session-up', function() {
+    var incrementer = increment.bind($(this));
+    incrementer('#session-length');
+  });
+
   var targetTime, intervalID, secondsLeft;
 
   // displays the secondsLeft before clicking the start button
