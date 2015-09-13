@@ -51,13 +51,34 @@ $(document).ready(function() {
     });
   })();
 
+  /**
+  * This function converts the secondsLeft to human readable format
+  * In minutes and seconds
+  * @param {number} secondsLeft
+  * @return {string}
+  */
+  function timeLeft(secondsLeft) {
+    var minutes = Math.trunc(secondsLeft / 60);
+    var seconds = secondsLeft % 60;
+    return pad(minutes) + ':' + pad(seconds);
 
-  var targetTime, intervalID, secondsLeft;
+    /**
+    * pad() puts leading zeros if seconds or minutes are less than 10
+    * @param {number} num
+    *@return {string}
+    */
+    function pad(num) {
+      return (num < 10) ? ('0' + num) : num;
+    }
+  }
+
+  var targetTime, intervalID, secondsLeft, sessionLength;
 
   // displays the secondsLeft before clicking the start button
-  targetTime = Date.now() + (1 * 60 * 1000);
+  sessionLength = +$('#session-length').text();
+  targetTime = Date.now() + (sessionLength * 60 * 1000);
   secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
-  $('#down-counter').text(secondsLeft);
+  $('#down-counter').text(timeLeft(secondsLeft));
 
   $('#timer-controls').on('click', '#start', function() {
 
@@ -82,7 +103,8 @@ $(document).ready(function() {
      * and clicking the start button
      */
 
-    targetTime = Date.now() + (1 * 60 * 1000);
+    sessionLength = +$('#session-length').text();
+    targetTime = Date.now() + (sessionLength * 60 * 1000);
     secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
     intervalID = setInterval(timer, 1000);
   });
@@ -92,7 +114,7 @@ $(document).ready(function() {
 
     // fresh value of secondsLeft is calculated after every second
     secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
-    $('#down-counter').text(secondsLeft);
+    $('#down-counter').text(timeLeft(secondsLeft));
     if (secondsLeft <= 0)
       clearInterval(intervalID);
   }
