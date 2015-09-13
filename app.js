@@ -105,6 +105,9 @@ $(document).ready(function() {
       clearInterval(intervalID);
     }
 
+    // disable the start button once it is clicked once
+    $('#start').attr('disabled', '');
+
     /**
      * re-calculates the secondsLeft after clicking the start button
      * we can't rely on the values calculated previously since
