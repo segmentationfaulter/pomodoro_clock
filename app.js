@@ -44,12 +44,12 @@ $(document).ready(function() {
     $('#session-controls').on('click', '#session-down', function() {
       var decrementer = decrement.bind($(this));
       decrementer('#session-length');
-      displayTimer();
+      displayTimer('#session-length');
     });
     $('#session-controls').on('click', '#session-up', function() {
       var incrementer = increment.bind($(this));
       incrementer('#session-length');
-      displayTimer();
+      displayTimer('#session-length');
     });
   })();
 
