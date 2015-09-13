@@ -105,8 +105,11 @@ $(document).ready(function() {
       clearInterval(intervalID);
     }
 
-    // disable the start button once it is clicked once
-    $('#start-work').attr('disabled', '');
+    // disable the unwanted buttons once timer is started
+    $(this).attr('disabled', '');
+    $('#start-break').attr('disabled', '');
+    $('#session-up').attr('disabled', '');
+    $('#session-down').attr('disabled', '');
 
     /**
      * re-calculates the secondsLeft after clicking the start button
