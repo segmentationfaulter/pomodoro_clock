@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
   /**
-  * The code below makes the arrows which control the seesion length and
-  * break length work.
-  */
+   * The code below makes the arrows which control the seesion length and
+   * break length work.
+   */
 
   (function() {
     function decrement(targetNode) {
@@ -23,8 +23,7 @@ $(document).ready(function() {
           $(targetNode).text('5');
         else
           $(targetNode).text(val);
-      }
-      else if (targetNode === '#session-length') {
+      } else if (targetNode === '#session-length') {
         if (val > 25)
           $(targetNode).text('25');
         else
