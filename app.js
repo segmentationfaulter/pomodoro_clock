@@ -78,15 +78,15 @@ $(document).ready(function() {
   /**
   * displayTimer() displays the timer in human readable format
   */
-  function displayTimer() {
+  function displayTimer(sessionType) {
     var targetTime, secondsLeft, sessionLength;
-    sessionLength = +$('#session-length').text();
+    sessionLength = +$(sessionType).text();
     targetTime = Date.now() + (sessionLength * 60 * 1000);
     secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
     $('#down-counter').text(timeLeft(secondsLeft));
   }
 
-  displayTimer();
+  displayTimer('#session-length');
 
   var intervalID, targetTime;
   $('#timer-controls').on('click', '#start-work', function() {
