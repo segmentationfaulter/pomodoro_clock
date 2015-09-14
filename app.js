@@ -106,10 +106,21 @@ $(document).ready(function() {
       }
 
       // disable the unwanted buttons once timer is started
-      $(this).attr('disabled', '');
-      $('#start-break').attr('disabled', '');
-      $('#session-up').attr('disabled', '');
-      $('#session-down').attr('disabled', '');
+      function disableButtons() {
+          if (sessionType === '#session-length') {
+            $('#start-work').attr('disabled', '');
+            $('#start-break').attr('disabled', '');
+            $('#session-up').attr('disabled', '');
+            $('#session-down').attr('disabled', '');
+          }
+          else if (sessionType === '#break-length') {
+            $('#start-work').attr('disabled', '');
+            $('#start-break').attr('disabled', '');
+            $('#break-up').attr('disabled', '');
+            $('#break-down').attr('disabled', '');
+          }
+      }
+      disableButtons();
 
       /**
        * re-calculates the secondsLeft after clicking the start button
