@@ -54,21 +54,21 @@ $(document).ready(function() {
   })();
 
   /**
-  * This function converts the secondsLeft to human readable format
-  * In minutes and seconds
-  * @param {number} secondsLeft
-  * @return {string}
-  */
+   * This function converts the secondsLeft to human readable format
+   * In minutes and seconds
+   * @param {number} secondsLeft
+   * @return {string}
+   */
   function timeLeft(secondsLeft) {
     var minutes = Math.trunc(secondsLeft / 60);
     var seconds = secondsLeft % 60;
     return pad(minutes) + ':' + pad(seconds);
 
     /**
-    * pad() puts leading zeros if seconds or minutes are less than 10
-    * @param {number} num
-    *@return {string}
-    */
+     * pad() puts leading zeros if seconds or minutes are less than 10
+     * @param {number} num
+     *@return {string}
+     */
     function pad(num) {
       return (num < 10) ? ('0' + num) : num;
     }
@@ -76,8 +76,8 @@ $(document).ready(function() {
 
 
   /**
-  * displayTimer() displays the timer in human readable format
-  */
+   * displayTimer() displays the timer in human readable format
+   */
   function displayTimer(sessionType) {
     var targetTime, secondsLeft, sessionLength;
     sessionLength = +$(sessionType).text();
@@ -86,9 +86,22 @@ $(document).ready(function() {
     $('#down-counter').text(timeLeft(secondsLeft));
   }
 
+  /**
+  * disable or enable buttons
+  */
+  // disable the unwanted buttons once timer is started
+  function disableButtons(directive) {
+      $('#start-work').attr('disabled', directive);
+      $('#start-break').attr('disabled', directive);
+      $('#session-up').attr('disabled', directive);
+      $('#session-down').attr('disabled', directive);
+      $('#break-up').attr('disabled', directive);
+      $('#break-down').attr('disabled', directive);
+  }
+
   function timer(sessionType) {
     var intervalID, targetTime;
-    $('#timer-controls').on('click', sessionType === '#session-length'? '#start-work' : '#start-break', function() {
+    $('#timer-controls').on('click', sessionType === '#session-length' ? '#start-work' : '#start-break', function() {
 
       /**
        * look what will happen if the three lines of code below are not there.
@@ -103,22 +116,7 @@ $(document).ready(function() {
         clearInterval(intervalID);
       }
 
-      // disable the unwanted buttons once timer is started
-      function disableButtons() {
-          if (sessionType === '#session-length') {
-            $('#start-work').attr('disabled', '');
-            $('#start-break').attr('disabled', '');
-            $('#session-up').attr('disabled', '');
-            $('#session-down').attr('disabled', '');
-          }
-          else if (sessionType === '#break-length') {
-            $('#start-work').attr('disabled', '');
-            $('#start-break').attr('disabled', '');
-            $('#break-up').attr('disabled', '');
-            $('#break-down').attr('disabled', '');
-          }
-      }
-      disableButtons();
+      disableButtons(true);
 
       /**
        * re-calculates the secondsLeft after clicking the start button
@@ -142,21 +140,19 @@ $(document).ready(function() {
         clearInterval(intervalID);
         if (sessionType === '#session-length') {
           displayTimer('#break-length');
-          $('#start-break').attr('disabled', false);
-          $('#start-work').attr('disabled', false);
+          disableButtons(false);
           timer('#break-length');
-        }
-        else if (sessionType === '#break-length') {
+        } else if (sessionType === '#break-length') {
           displayTimer('#session-length');
-          $('#start-work').attr('disabled', false);
+          disableButtons(false);
           timer('#session-length');
         }
       }
     }
   }
   (function() {
-    $('#start-break').attr('disabled', true);
     displayTimer('#session-length');
+    $('#start-break').attr('disabled', true);
     timer('#session-length');
   })();
 });
