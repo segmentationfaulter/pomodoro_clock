@@ -119,7 +119,6 @@ $(document).ready(function() {
 
     var sessionLength = +$('#session-length').text();
     targetTime = Date.now() + (sessionLength * 60 * 1000);
-    var secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
     intervalID = setInterval(timer, 1000);
   });
 
