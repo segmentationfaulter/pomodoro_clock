@@ -86,8 +86,6 @@ $(document).ready(function() {
     $('#down-counter').text(timeLeft(secondsLeft));
   }
 
-  displayTimer('#session-length');
-
   function timer(sessionType) {
     var intervalID, targetTime;
     $('#timer-controls').on('click', sessionType === '#session-length'? '#start-work' : '#start-break', function() {
@@ -140,9 +138,25 @@ $(document).ready(function() {
       // fresh value of secondsLeft is calculated after every second
       var secondsLeft = Math.ceil((targetTime - Date.now()) / 1000);
       $('#down-counter').text(timeLeft(secondsLeft));
-      if (secondsLeft <= 0)
+      if (secondsLeft <= 0) {
         clearInterval(intervalID);
+        if (sessionType === '#session-length') {
+          displayTimer('#break-length');
+          $('#start-break').attr('disabled', false);
+          $('#start-work').attr('disabled', false);
+          timer('#break-length');
+        }
+        else if (sessionType === '#break-length') {
+          displayTimer('#session-length');
+          $('#start-work').attr('disabled', false);
+          timer('#session-length');
+        }
+      }
     }
   }
-  timer('#session-length');
+  (function() {
+    $('#start-break').attr('disabled', true);
+    displayTimer('#session-length');
+    timer('#session-length');
+  })();
 });
