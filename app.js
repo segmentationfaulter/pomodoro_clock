@@ -90,7 +90,7 @@ $(document).ready(function() {
 
   function timer(sessionType) {
     var intervalID, targetTime;
-    $('#timer-controls').on('click', '#start-work', function() {
+    $('#timer-controls').on('click', sessionType === '#session-length'? '#start-work' : '#start-break', function() {
 
       /**
        * look what will happen if the three lines of code below are not there.
